@@ -116,10 +116,16 @@ Need to create your own matchers? Create your new matcher in a module, then use
 ```ruby
 module DanceMatcher
   def boogie_all_night!
+    # Delegates to `assert(condition, message)`.
+    #
+    #   positive?   - returns `true` if .should, or `false` if .should.not
+    #   test        - the MiniTest object
+    #   msg         - the failure message. `nil` if not set
+    #
     if positive?
-      test.assert left.respond_to?(:dance)
+      test.assert left.respond_to?(:dance), msg
     else
-      test.assert ! left.respond_to?(:dance)
+      test.refute left.respond_to?(:dance), msg
     end
   end
 end
