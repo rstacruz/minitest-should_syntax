@@ -4,9 +4,9 @@ module MiniTest::ArrayMatcher
   def like(right)
     super  unless left.is_a?(Array) && right.is_a?(Array)
     if positive?
-      test.assert_equal left.sort, right.sort
+      test.assert_equal left.sort, right.sort, msg
     else
-      test.refute_equal left.sort, right.sort
+      test.refute_equal left.sort, right.sort, msg
     end
   end
 end
