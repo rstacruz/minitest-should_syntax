@@ -4,5 +4,7 @@ require 'minitest/autorun'
 require 'minitest/should_syntax'
 require 'mocha/setup'
 
-class UnitTest < MiniTest::Unit::TestCase
+class MiniTest::Unit::TestCase
+  # helpers
 end
+

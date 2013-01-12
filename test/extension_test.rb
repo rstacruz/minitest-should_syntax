@@ -13,22 +13,22 @@ end
 
 MiniTest::ShouldSyntax.add MiniTest::ArrayMatcher
 
-class ExtensionTest < UnitTest
-  def test_extension
+describe "Extensions" do
+  it ".should.be.like" do
     a = %w(a b c)
     b = %w(b c a)
 
     a.should.be.like b
   end
 
-  def test_extension_2
+  it ".should.not.be.like" do
     a = %w(a b c)
     b = %w(b c A)
 
-    a.should_not.be.like b
+    a.should.not.be.like b
   end
 
-  def test_extension_3
+  it "super" do
     a = %w(a b c)
     b = 2
 
