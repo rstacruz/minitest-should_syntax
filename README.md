@@ -6,6 +6,9 @@ Rspec-like matching for MiniTest.
 tests.  It monkey-patches Object to translate RSpec-like sugar into plain 
 MiniTest `assert` matchers.
 
+(*Ouch! Monkey patch?* Yes! But it only defines `Object#should` and 
+ `#should_not`.)
+
 ```
 $ gem install minitest-should_syntax
 ```
