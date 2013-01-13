@@ -53,8 +53,7 @@ obj.should_not.be.nil
 # Anything else will pass through with a ?:
 obj.should.be.good_looking         # => assert obj.good_looking?
 
-should.raise(Error) { lol }
-should_not.raise { puts "hi" }
+should.raise(ZeroDivisionError) { 2/0 }
 
 # You may add messages to your asserts with #blaming or #messaging.
 (2 + 2).should.blaming("weird math") == 4
