@@ -45,10 +45,9 @@ obj.should.nil                     # => assert_nil obj
 obj.should.be.nil                  # => assert_nil obj
 obj.should.be.a.nil                # => assert_nil obj
 
-# You can also use should_not, or should.not:
-obj.should_not == 3
+# You can also use should.not:
 obj.should.not == 3
-obj.should_not.be.nil
+obj.should.not.be.nil
 
 # Anything else will pass through with a ?:
 obj.should.be.good_looking         # => assert obj.good_looking?
@@ -57,6 +56,9 @@ should.raise(ZeroDivisionError) { 2/0 }
 
 # You may add messages to your asserts with #blaming or #messaging.
 (2 + 2).should.blaming("weird math") == 4
+
+# should_not is an alias for should.not:
+obj.should_not == 3
 ```
 
 ## Wrapped assertions
