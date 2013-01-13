@@ -97,9 +97,19 @@ Use the `msg` helper:
 it "should work" do
   book = Book.new title: "Pride & Prejudice"
 
-  msg "The title should've been set on constructor."
+  msg "The title should've been set on constructor"
   book.title.should == "Pride & Prejudice"
 end
+```
+
+Result:
+
+```
+1) Failure:
+should work(Test) [your_test.rb:77]:
+The title should've been set on constructor.
+Expected: "Pride & Prejudice"
+  Actual: nil
 ```
 
 Or you can use `.blaming` which does the same thing (with a more cumbersome 
@@ -109,7 +119,7 @@ Or you can use `.blaming` which does the same thing (with a more cumbersome
 it "should work" do
   book = Book.new title: "Pride & Prejudice"
 
-  message = "The title should've been set on constructor."
+  message = "The title should've been set on constructor"
   book.title.should.blaming(message) == "Pride & Prejudice"
 end
 ```
