@@ -44,9 +44,8 @@ module MiniTest
       self.send :include, extension
     end
 
-    def initialize(left, neg=false)
+    def initialize(left)
       @left = left
-      @neg  = neg
       if test.msg
         blaming test.msg
         test.msg = nil
@@ -139,7 +138,7 @@ class Object
   end
 
   def should_not
-    MiniTest::ShouldSyntax.new(self, true)
+    should.not
   end
 end
 
