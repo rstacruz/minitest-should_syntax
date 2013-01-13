@@ -34,55 +34,60 @@ end
 Then you may use it as so:
 
 ```ruby
-obj.should == 2                    # => assert_equal 2, obj
-obj.should =~ /regex/              # => assert_match /regex/, obj
-obj.should != 3                    # => assert_not_equal 3, obj
-obj.should.nil                     # => assert_nil obj
-obj.should.respond_to(:freeze)     # => assert_respond_to obj, :freeze 
+  obj.should == 2                    # => assert_equal 2, obj
+  obj.should =~ /regex/              # => assert_match /regex/, obj
+  obj.should != 3                    # => assert_not_equal 3, obj
+  obj.should.nil                     # => assert_nil obj
+  obj.should.respond_to(:freeze)     # => assert_respond_to obj, :freeze 
 
 # Note that .be, .a and .an are optional.
-obj.should.nil                     # => assert_nil obj
-obj.should.be.nil                  # => assert_nil obj
-obj.should.be.a.nil                # => assert_nil obj
+  obj.should.nil                     # => assert_nil obj
+  obj.should.be.nil                  # => assert_nil obj
+  obj.should.be.a.nil                # => assert_nil obj
 
 # You can also use should.not:
-obj.should.not == 3
-obj.should.not.be.nil
+  obj.should.not == 3
+  obj.should.not.be.nil
 
 # Anything else will pass through with a ?:
-obj.should.be.good_looking         # => assert obj.good_looking?
+  obj.should.be.good_looking         # => assert obj.good_looking?
 
-should.raise(ZeroDivisionError) { 2/0 }
-
-# You may add messages to your asserts with #blaming or #messaging.
-(2 + 2).should.blaming("weird math") == 4
+# Testing exceptions:
+  should.raise(ZeroDivisionError) { 2/0 }
 
 # should_not is an alias for should.not:
-obj.should_not == 3
+  obj.should_not == 3
 ```
 
 ## Wrapped assertions
 
-These are based from MiniTest::Assertions.
+These are based on [MiniTest::Assertions].
 
-| Test::Unit                  | MiniTest::ShouldSyntax                |
-|-----------------------------|---------------------------------------|
-| assert_equal                | should.equal, should ==               |
-| assert_not_equal            | should.not.equal, should.not ==       |
-| assert_same                 | should.be                             |
-| assert_not_same             | should.not.be                         |
-| assert_nil                  | should.be.nil                         |
-| assert_not_nil              | should.not.be.nil                     |
-| assert_in_delta             | should.be.close                       |
-| assert_match                | should.match, should =~               |
-| assert_no_match             | should.not.match, should.not =~       |
-| assert_instance_of          | should.be.an.instance_of              |
-| assert_kind_of              | should.be.a.kind_of                   |
-| assert_respond_to           | should.respond_to                     |
-| assert_raise                | should.raise                          |
-| assert_nothing_raised       | should.not.raise                      |
-| assert_throws               | should.throw                          |
-| assert_block                | should.satisfy                        |
+| MiniTest::ShouldSyntax                  | [MiniTest::Assertions]      |
+|-----------------------------------------|-----------------------------|
+| x.should.equal y                        | assert_equal x, y           |
+| x.should == y                           | assert_equal x, y           |
+| x.should.not.equal                      | refute_equal x, y           |
+| x.should !=                             | refute_equal x, y           |
+| x.should.be                             | assert_same x, y            |
+| x.should.not.be                         | refute_same x, y            |
+| x.should >= *(and others)*              | assert_operator x, :>=, y   |
+| x.should.not >= *(and others)*          | refute_operator x, :>=, y   |
+| x.should.be.nil                         | assert_nil x                |
+| x.should.not.be.nil                     | refute_nil x                |
+| x.should.be.close y                     | assert_in_delta y           |
+| x.should.be.in_epsilon y                | assert_in_epsilon y         |
+| x.should.match /y/                      | assert_match x, /y/         |
+| x.should =~ /y/                         | assert_match x, /y/         |
+| x.should.not.match, should.not =~       | refute_match                |
+| x.should.be.an.instance_of y            | assert_instance_of x, y     |
+| x.should.be.a.kind_of x, y              | assert_kind_of x, y         |
+| x.should.respond_to :y                  | assert_respond_to x, :y     |
+| should.raise(x) { ... }                 | assert_raise(x) { ... }     |
+| should.throw(x) { ... }                 | assert_throws(x) { ... }    |
+| should.satisfy { ... }                  | assert_block { ... }        |
+
+[MiniTest::Assertions]: https://github.com/seattlerb/minitest/blob/master/lib/minitest/unit.rb
 
 ## Messages
 
