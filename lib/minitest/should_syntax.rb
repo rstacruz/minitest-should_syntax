@@ -75,7 +75,6 @@ module MiniTest
     def messaging(msg); @msg = msg; self; end
 
     def ==(right)             assert_or_refute :equal, right, left; end
-    def !=(right)             refute_or_assert :equal, right, left; end
     def =~(right)             assert_or_refute :match, right, left; end
     def >(right)              assert_or_refute :operator, left, :>,  right; end
     def <(right)              assert_or_refute :operator, left, :<,  right; end
@@ -90,6 +89,13 @@ module MiniTest
     def empty()               assert_or_refute :empty, left; end
     def satisfy(&blk)         assert_or_refute :block, &blk; end
 
+    # Ruby 1.8 doesn't support overriding !=.
+    if RUBY_VERSION >= "1.9"
+      class_eval %[
+        def !=(right) refute_or_assert :equal, right, left; end
+      ]
+    end
+
     def match(right)          self =~ right; end
     def equal(right)          self == right; end
 
@@ -97,11 +103,13 @@ module MiniTest
     def in_epsilon(right, d=0.001)  assert_or_refute :in_epsilon, right, left, d; end
 
     def assert_or_refute(what, *args, &blk)
-      test.send (positive? ? :"assert_#{what}" : :"refute_#{what}"), *args, msg, &blk
+      args << msg
+      test.send((positive? ? :"assert_#{what}" : :"refute_#{what}"), *args, &blk)
     end
 
     def refute_or_assert(what, *args)
-      test.send (negative? ? :"assert_#{what}" : :"refute_#{what}"), *args, msg
+      args << msg
+      test.send((negative? ? :"assert_#{what}" : :"refute_#{what}"), *args)
     end
 
     def throw(what=nil, &blk)
