@@ -142,6 +142,8 @@ class Object
   end
 end
 
+# Patch TestCase::before_setup to invoke ShouldSyntax,
+# and inject the #msg and #otherwise helper.
 class MiniTest::Unit::TestCase
   alias :mts_before_setup :before_setup
 
@@ -157,5 +159,9 @@ class MiniTest::Unit::TestCase
 
   def msg=(string)
     @msg = string
+  end
+
+  def otherwise(message)
+    msg message
   end
 end

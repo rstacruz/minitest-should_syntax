@@ -91,13 +91,13 @@ These are based on [MiniTest::Assertions].
 
 ## Messages
 
-Use the `msg` helper:
+Use the `otherwise` helper:
 
 ``` ruby
 it "should work" do
   book = Book.new title: "Pride & Prejudice"
 
-  msg "The title should've been set on constructor"
+  otherwise "The title should've been set on constructor"
   book.title.should == "Pride & Prejudice"
 end
 ```
