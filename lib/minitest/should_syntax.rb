@@ -165,3 +165,16 @@ class MiniTest::Unit::TestCase
     msg message
   end
 end
+
+# Patch #location() to ignore should_syntax.
+class MiniTest::Unit
+  def location(e) # :nodoc:
+    last_before_assertion = ""
+    e.backtrace.reverse_each do |s|
+      break if s =~ /(in .(assert|refute|flunk|pass|fail|raise|must|wont))|(minitest\/should_syntax)/
+      last_before_assertion = s
+    end
+    last_before_assertion.sub(/:in .*$/, '')
+  end
+end
+
