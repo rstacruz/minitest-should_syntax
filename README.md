@@ -152,3 +152,14 @@ MiniTest::ShouldSyntax.add DanceMatcher
 dancer.should.boogie_all_night!
 ```
 
+## Ruby 1.8 warning
+
+If you're going to target Ruby 1.8, avoid using `.should !=`. Use
+`.should.not ==` instead.
+
+Reason: 1.8 doesn't allow overriding the != operator, so any `.should !=` will 
+silently work differently in 1.8.
+
+## Acknowledgements & licensing
+
+(c) 2013 Rico Sta. Cruz, MIT license
