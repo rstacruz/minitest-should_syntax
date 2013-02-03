@@ -45,18 +45,18 @@ Then you may use it as so:
   obj.should.be.nil                  # => assert_nil obj
   obj.should.be.a.nil                # => assert_nil obj
 
-# You can also use should.not:
-  obj.should.not == 3
-  obj.should.not.be.nil
+# Use `should.not` instead `should` to negate any comparison.
+  obj.should.not == 3                # => refute_equal 3, obj
+  obj.should.not =~ /regex/          # => refute_match obj, regex
+  obj.should.not.be.nil              # => refute obj.nil?
 
 # Anything else will pass through with a ?:
   obj.should.be.good_looking         # => assert obj.good_looking?
 
 # Testing exceptions:
-  should.raise(ZeroDivisionError) { 2/0 }
-
-# should_not is an alias for should.not:
-  obj.should_not == 3
+  should.raise ZeroDivisionError do
+    2/0
+  end
 ```
 
 ## Wrapped assertions
